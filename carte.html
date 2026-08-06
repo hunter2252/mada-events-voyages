@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte - Mada Events & Voyages</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ambiance.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 650px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+            background: #e8f5e9;
+        }
+        .legend {
+            background: var(--blanc);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+        .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .map-tags {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .map-tag {
+            display: inline-block;
+            background: var(--corail);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .map-tag:hover { background: #d45d3a; transform: scale(1.05); }
+        .map-tag.active { background: var(--vert-foret); }
+        .region-panel {
+            background: var(--blanc);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        .region-panel h3 {
+            color: var(--vert-foret);
+            margin-bottom: 20px;
+        }
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .region-mini {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid var(--corail);
+        }
+        .region-mini:hover {
+            background: #e8f5e9;
+            transform: translateX(5px);
+        }
+        .region-mini strong {
+            color: var(--vert-foret);
+        }
+        .region-mini .cheflieu {
+            color: var(--corail);
+            font-size: 0.85em;
+        }
+        .region-mini .atouts {
+            font-size: 0.8em;
+            color: var(--gris);
+            margin-top: 5px;
+        }
+        .info-box {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="particules" id="particules"></div>
+    <div class="annonce-vacances">
+        <span>◆</span> Explorez les 24 régions de Madagascar <span>🌴</span>
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo">🌴 Mada Events & Voyages</a>
+        <ul class="menu">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="prestataires/index.html">Prestataires</a></li>
+            <li><a href="regions.html">Régions</a></li>
+            <li><a href="carte.html">Carte</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">🗺️ Carte des 24 Régions</h2>
+        <p class="section-subtitle">Cliquez sur une région pour découvrir ses atouts et prestataires</p>
+
+        <div class="map-tags">
+            <button class="map-tag active" onclick="showAll()">🗂️ Tout voir</button>
+            <button class="map-tag" onclick="filterByProvince('tana')">🏙️ Antananarivo</button>
+            <button class="map-tag" onclick="filterByProvince('fianar')">⛰️ Fianarantsoa</button>
+            <button class="map-tag" onclick="filterByProvince('toam')">🌊 Toamasina</button>
+            <button class="map-tag" onclick="filterByProvince('maj')">☀️ Mahajanga</button>
+            <button class="map-tag" onclick="filterByProvince('toliara')">🌵 Toliara</button>
+            <button class="map-tag" onclick="filterByProvince('ants')">🏔️ Antsiranana</button>
+        </div>
+
+        <div id="map"></div>
+
+        <div class="legend">
+            <div class="legend-item"><span class="legend-dot" style="background:#2d6a4f;"></span> Province Antananarivo</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#1e6091;"></span> Province Fianarantsoa</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#e76f51;"></span> Province Toamasina</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#f4a261;"></span> Province Mahajanga</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#8b5e34;"></span> Province Toliara</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#9b59b6;"></span> Province Antsiranana</div>
+        </div>
+
+        <!-- Panneau des 24 régions -->
+        <div class="region-panel">
+            <h3>📋 Les 24 Régions en détail</h3>
+            <div class="region-grid" id="regionList"></div>
+        </div>
+
+        <div class="info-box">
+            <strong>💡 Astuce :</strong> Cliquez sur un marqueur sur la carte pour voir les détails. Utilisez les boutons ci-dessus pour filtrer par province. Cliquez sur une région dans la liste pour zoomer dessus.
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="prestataires/index.html" class="btn btn-primary">📋 Voir l'annuaire complet</a>
+            <a href="regions.html" class="btn btn-outline" style="border-color:var(--vert-foret);color:var(--vert-foret);">📖 Guide des régions</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Madagascar Events & Voyages — Le carnet d'adresses de la Grande Île</p>
+        <p><small>🌺 24 régions, une île, mille possibilités</small></p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Carte centrée sur Madagascar avec zoom optimal
+        const map = L.map('map').setView([-19.5, 46.7], 6);
+        map.setMaxBounds([[-11.0, 42.0], [-26.5, 51.5]]);
+        map.setMinZoom(5);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Données des 24 régions
+        const regions = [
+            {nom:'Analamanga',province:'tana',lat:-18.910,lng:47.525,cheflieu:'Antananarivo',atouts:'💒 Mariages · 🏨 Hôtels · 🍽️ Traiteurs · 📸 Photographes · 🚗 Location'},
+            {nom:'Itasy',province:'tana',lat:-18.900,lng:46.700,cheflieu:'Miarinarivo',atouts:'🏨 Écolodges · 🌿 Nature · 🧭 Guides'},
+            {nom:'Vakinankaratra',province:'tana',lat:-19.870,lng:47.030,cheflieu:'Antsirabe',atouts:'🏨 Hôtels thermaux · 🛍️ Artisanat · 🧭 Excursions'},
+            {nom:'Bongolava',province:'tana',lat:-18.770,lng:46.050,cheflieu:'Tsiroanomandidy',atouts:'🌾 Tourisme rural · 🧭 Guides locaux'},
+            {nom:'Haute Matsiatra',province:'fianar',lat:-21.450,lng:47.080,cheflieu:'Fianarantsoa',atouts:'🍷 Vignobles · 🏨 Hôtels · 💒 Réceptions'},
+            {nom:'Amoron i Mania',province:'fianar',lat:-20.530,lng:47.250,cheflieu:'Ambositra',atouts:'🪑 Marqueterie · 🌳 Ranomafana · 🧭 Guides'},
+            {nom:'Vatovavy',province:'fianar',lat:-21.200,lng:48.350,cheflieu:'Mananjary',atouts:'🏖️ Plages · 🏨 Hôtels · 🌴 Pangalanes'},
+            {nom:'Fitovinany',province:'fianar',lat:-22.150,lng:48.000,cheflieu:'Manakara',atouts:'🚂 Train FCE · 🌴 Pangalanes · 🧭 Guides'},
+            {nom:'Ihorombe',province:'fianar',lat:-22.400,lng:46.130,cheflieu:'Ihosy',atouts:'🏜️ Porte Isalo · 🧭 Guides trek'},
+            {nom:'Atsinanana',province:'toam',lat:-18.150,lng:49.400,cheflieu:'Toamasina',atouts:'🏖️ Plages · 🦎 Andasibe · 🏨 Hôtels · 🧭 Guides'},
+            {nom:'Analanjirofo',province:'toam',lat:-17.050,lng:49.450,cheflieu:'Fenoarivo Ats.',atouts:'🐋 Baleines · 🏝️ Sainte-Marie · 🏨 Écolodges · 💒 Mariages'},
+            {nom:'Alaotra-Mangoro',province:'toam',lat:-17.830,lng:48.430,cheflieu:'Ambatondrazaka',atouts:'🌾 Lac Alaotra · 🧭 Guides · 🐦 Oiseaux'},
+            {nom:'Boeny',province:'maj',lat:-15.720,lng:46.320,cheflieu:'Mahajanga',atouts:'🏖️ Plages · 🏨 Hôtels · 💒 Mariages · 🧭 Guides'},
+            {nom:'Sofia',province:'maj',lat:-14.880,lng:47.990,cheflieu:'Antsohihy',atouts:'🌿 Trek · 🧭 Guides locaux · 🏞️ Nature'},
+            {nom:'Betsiboka',province:'maj',lat:-16.950,lng:46.830,cheflieu:'Maevatanana',atouts:'🏞️ Paysages · 🧭 Guides · ⛏️ Orpaillage'},
+            {nom:'Melaky',province:'maj',lat:-18.070,lng:44.020,cheflieu:'Maintirano',atouts:'🗿 Tsingy · 🧭 Aventures · 🌊 Côte sauvage'},
+            {nom:'Atsimo-Andrefana',province:'toliara',lat:-23.350,lng:43.670,cheflieu:'Toliara',atouts:'🏖️ Plages · 🏜️ Isalo · 🏨 Hôtels · 💒 Mariages · 🤿 Plongée'},
+            {nom:'Androy',province:'toliara',lat:-25.170,lng:46.080,cheflieu:'Ambovombe',atouts:'🌵 Endémique · 🧭 Guides · 🏜️ Désert'},
+            {nom:'Anosy',province:'toliara',lat:-25.030,lng:46.990,cheflieu:'Fort-Dauphin',atouts:'🏝️ Paradis · 🦎 Lémuriens · 🏨 Hôtels · 💒 Mariages'},
+            {nom:'Menabe',province:'toliara',lat:-20.290,lng:44.280,cheflieu:'Morondava',atouts:'🌅 Baobabs · 🗿 Tsingy · 🏨 Hôtels · 📸 Photo'},
+            {nom:'Diana',province:'ants',lat:-12.350,lng:49.290,cheflieu:'Antsiranana',atouts:'🏝️ Nosy Be · 🏖️ Plages · 🏨 Luxe · 💒 Mariages · 🤿 Plongée'},
+            {nom:'Sava',province:'ants',lat:-14.270,lng:50.170,cheflieu:'Sambava',atouts:'🌿 Vanille · 🏔️ Marojejy · 🧭 Trek · 🌊 Côte'},
+        ];
+
+        const provinceColors = {
+            tana: '#2d6a4f',
+            fianar: '#1e6091',
+            toam: '#e76f51',
+            maj: '#f4a261',
+            toliara: '#8b5e34',
+            ants: '#9b59b6'
+        };
+
+        const provinceNames = {
+            tana: 'Antananarivo',
+            fianar: 'Fianarantsoa',
+            toam: 'Toamasina',
+            maj: 'Mahajanga',
+            toliara: 'Toliara',
+            ants: 'Antsiranana'
+        };
+
+        function makeIcon(color) {
+            return L.divIcon({
+                html: '<div style="background:'+color+';width:30px;height:30px;border-radius:50%;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>',
+                iconSize: [30,30],
+                iconAnchor: [15,15],
+                popupAnchor: [0,-16]
+            });
+        }
+
+        const markersByProvince = {};
+        const allMarkers = [];
+
+        regions.forEach(r => {
+            const color = provinceColors[r.province];
+            const marker = L.marker([r.lat, r.lng], {icon: makeIcon(color)})
+                .bindPopup('<b>'+r.nom+'</b><br>📍 Chef-lieu : '+r.cheflieu+'<br>🏛️ Province : '+provinceNames[r.province]+'<br>🔍 '+r.atouts)
+                .addTo(map);
+            
+            if (!markersByProvince[r.province]) markersByProvince[r.province] = [];
+            markersByProvince[r.province].push(marker);
+            allMarkers.push({marker, province: r.province});
+        });
+
+        function showAll() {
+            allMarkers.forEach(m => map.addLayer(m.marker));
+            updateButtons(null);
+            map.setView([-19.5, 46.7], 6);
+        }
+
+        function filterByProvince(prov) {
+            allMarkers.forEach(m => map.removeLayer(m.marker));
+            if (markersByProvince[prov]) {
+                markersByProvince[prov].forEach(m => map.addLayer(m));
+                const coords = markersByProvince[prov].map(m => m.getLatLng());
+                const bounds = L.latLngBounds(coords);
+                map.fitBounds(bounds, {padding: [50, 50], maxZoom: 8});
+            }
+            updateButtons(prov);
+        }
+
+        function updateButtons(active) {
+            document.querySelectorAll('.map-tag').forEach(btn => {
+                btn.classList.remove('active');
+                if (active === null && btn.textContent.includes('Tout voir')) btn.classList.add('active');
+                if (active === 'tana' && btn.textContent.includes('Antananarivo')) btn.classList.add('active');
+                if (active === 'fianar' && btn.textContent.includes('Fianarantsoa')) btn.classList.add('active');
+                if (active === 'toam' && btn.textContent.includes('Toamasina')) btn.classList.add('active');
+                if (active === 'maj' && btn.textContent.includes('Mahajanga')) btn.classList.add('active');
+                if (active === 'toliara' && btn.textContent.includes('Toliara')) btn.classList.add('active');
+                if (active === 'ants' && btn.textContent.includes('Antsiranana')) btn.classList.add('active');
+            });
+        }
+
+        // Construire la liste des régions
+        const regionList = document.getElementById('regionList');
+        regions.forEach(r => {
+            const div = document.createElement('div');
+            div.className = 'region-mini';
+            div.innerHTML = '<strong>'+r.nom+'</strong><br><span class="cheflieu">📍 '+r.cheflieu+'</span><br><span class="atouts">'+r.atouts+'</span>';
+            div.onclick = () => {
+                map.setView([r.lat, r.lng], 9);
+            };
+            regionList.appendChild(div);
+        });
+    </script>
+
+    <script src="js/ambiance.js"></script>
+</body>
+</html>

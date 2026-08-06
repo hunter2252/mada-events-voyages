@@ -1,0 +1,161 @@
+/* ========== BARRE ANNONCE VACANCES ========== */
+.annonce-vacances {
+    background: linear-gradient(135deg, #e76f51, #f4a261, #e76f51);
+    background-size: 200% 200%;
+    animation: gradientMove 3s ease infinite;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 0.95em;
+    letter-spacing: 1px;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.annonce-vacances span {
+    animation: pulse 2s infinite;
+    display: inline-block;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ========== PARTICULES TROPICALES ========== */
+.particules {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particule {
+    position: absolute;
+    animation: tomber linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes tomber {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ========== EFFET DE SURVOL AMÉLIORÉ ========== */
+.card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* ========== BOUTON FLOTTANT MÉTÉO ========== */
+.meteo-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: white;
+    border-radius: 20px;
+    padding: 15px 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    z-index: 999;
+    font-size: 0.9em;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.meteo-widget:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.meteo-widget .temp {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--corail);
+}
+
+.meteo-widget .ville {
+    color: var(--vert-foret);
+    font-weight: bold;
+}
+
+/* ========== COMPTEUR DE JOURS ========== */
+.compteur-vacances {
+    background: linear-gradient(135deg, rgba(45,106,79,0.1), rgba(30,96,145,0.1));
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    margin: 30px 0;
+    border: 2px dashed var(--vert-foret);
+}
+
+.compteur-vacances .jours {
+    font-size: 3em;
+    font-weight: bold;
+    color: var(--corail);
+    display: block;
+}
+
+.compteur-vacances .label {
+    color: var(--vert-foret);
+    font-size: 1.1em;
+}
+
+/* ========== CITATION VOYAGE ========== */
+.quote-box {
+    background: white;
+    border-left: 5px solid var(--corail);
+    padding: 25px 30px;
+    margin: 40px 0;
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    font-size: 1.2em;
+    color: #555;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.quote-box .author {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--vert-foret);
+    font-style: normal;
+}
+
+/* ========== INDICATEUR DE SAISON ========== */
+.saison-indicator {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.saison-seche { background: #fff3cd; color: #856404; }
+.saison-pluies { background: #d1ecf1; color: #0c5460; }
+.saison-baleines { background: #d4edda; color: #155724; }
+</style>

@@ -1,0 +1,407 @@
+/* ========== FOND ET AMBIANCE GENERALE ========== */
+:root {
+    --noir: #1a1a1a;
+    --anthracite: #2d2d2d;
+    --gris-fonce: #3a3a3a;
+    --gris: #5a5a5a;
+    --blanc: #ffffff;
+    --creme: #f5f0e8;
+    --dore: #b8943a;
+    --dore-clair: #d4b96a;
+    --corail: #a0523d;
+    --bordeaux: #5c1a1a;
+    --bleu-nuit: #1a2a3a;
+    --vert-sombre: #1a2a1f;
+    --fond: #e0d8cc;
+    --fond-carte: #faf7f2;
+    --texte-clair: #f0ebe0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: var(--fond);
+    background-image: 
+        linear-gradient(180deg, rgba(184,148,58,0.04) 0%, transparent 40%, rgba(184,148,58,0.03) 100%);
+    color: var(--noir);
+    line-height: 1.8;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--dore), var(--dore-clair), var(--dore), transparent);
+    pointer-events: none;
+    z-index: 10000;
+}
+
+/* ========== NAVIGATION ========== */
+nav {
+    background: var(--noir);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 3px;
+    z-index: 100;
+    border-bottom: 1px solid rgba(184,148,58,0.3);
+}
+
+nav .logo {
+    color: var(--dore);
+    font-size: 1.2em;
+    font-weight: normal;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-family: 'Georgia', serif;
+    text-transform: uppercase;
+}
+
+nav .menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+nav .menu a {
+    color: #bbb;
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 8px 0;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+}
+
+nav .menu a:hover {
+    color: var(--dore);
+    border-bottom: 1px solid var(--dore);
+}
+
+/* ========== BANNIERE ACCUEIL ========== */
+.hero-banner {
+    background: linear-gradient(160deg, var(--noir) 0%, var(--anthracite) 50%, var(--bleu-nuit) 100%);
+    color: var(--blanc);
+    text-align: center;
+    padding: 140px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 60%, rgba(184,148,58,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 40%, rgba(184,148,58,0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to top, var(--fond), transparent);
+    pointer-events: none;
+}
+
+.hero-banner h1 {
+    font-size: 2.4em;
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif;
+    letter-spacing: 2px;
+    font-weight: normal;
+    color: var(--blanc);
+    position: relative;
+    z-index: 1;
+}
+
+.hero-banner p {
+    font-size: 1.1em;
+    margin-bottom: 40px;
+    font-style: italic;
+    color: #ccc;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-banner .btn-group {
+    position: relative;
+    z-index: 1;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 30px;
+    border-radius: 0;
+    text-decoration: none;
+    font-size: 0.85em;
+    letter-spacing: 2px;
+    margin: 0 8px;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: var(--dore);
+    color: var(--noir);
+    border: 1px solid var(--dore);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--dore);
+    text-decoration: none;
+}
+
+.btn-outline {
+    border: 1px solid rgba(255,255,255,0.4);
+    color: var(--blanc);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    border-color: var(--dore);
+    color: var(--dore);
+    text-decoration: none;
+}
+
+/* ========== CONTENEUR PRINCIPAL ========== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 30px;
+}
+
+.section-title {
+    text-align: center;
+    color: var(--noir);
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    font-family: 'Georgia', serif;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 60px;
+    font-size: 0.95em;
+    font-style: italic;
+}
+
+/* ========== GRILLE MAGAZINE ========== */
+.magazine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.card {
+    background: var(--fond-carte);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: grayscale(30%);
+    transition: all 0.5s ease;
+}
+
+.card:hover .card-image {
+    filter: grayscale(0%);
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.card-tag {
+    display: inline-block;
+    color: var(--dore);
+    font-size: 0.75em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--dore);
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.card-body h3 {
+    color: var(--noir);
+    margin-bottom: 12px;
+    font-size: 1.2em;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+.card-body p {
+    color: #444;
+    margin-bottom: 25px;
+    line-height: 1.7;
+    font-size: 0.95em;
+}
+
+.card-body .btn-card {
+    display: inline-block;
+    color: var(--noir);
+    padding: 0;
+    text-decoration: none;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--noir);
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.card-body .btn-card:hover {
+    color: var(--dore);
+    border-color: var(--dore);
+}
+
+/* ========== CITATIONS ========== */
+.quote-box {
+    background: transparent;
+    border-left: 2px solid var(--dore);
+    padding: 20px 30px;
+    margin: 50px 0;
+    font-style: italic;
+    font-size: 1.1em;
+    color: var(--gris-fonce);
+}
+
+.quote-box .author {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--dore);
+    font-style: normal;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+}
+
+/* ========== COMPTEUR ========== */
+.compteur-vacances {
+    text-align: center;
+    padding: 30px;
+    margin: 40px 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.compteur-vacances .jours {
+    font-size: 3.5em;
+    font-weight: bold;
+    color: var(--dore);
+    display: block;
+    font-family: 'Georgia', serif;
+}
+
+.compteur-vacances .label {
+    color: #444;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+}
+
+/* ========== PIED DE PAGE ========== */
+footer {
+    background: var(--noir);
+    color: #aaa;
+    text-align: center;
+    padding: 30px;
+    margin-top: 60px;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+}
+
+footer a {
+    color: var(--dore);
+    text-decoration: none;
+}
+
+/* ========== BARRE ANNONCE ========== */
+.annonce-vacances {
+    background: var(--noir);
+    color: var(--dore);
+    text-align: center;
+    padding: 8px;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(184,148,58,0.2);
+    font-weight: bold;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .hero-banner h1 { font-size: 1.8em; }
+    .hero-banner { padding: 80px 20px; }
+    nav { flex-direction: column; gap: 15px; text-align: center; }
+    .magazine-grid { grid-template-columns: 1fr; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* ========== FICHES PRESTATAIRES ========== */
+.presta-card a {
+    color: var(--noir);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.presta-card a:hover {
+    color: var(--dore);
+}
+.presta-card .btn-wa {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 15px;
+    background: var(--dore);
+    color: var(--noir) !important;
+    text-decoration: none;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+.presta-card .btn-wa:hover {
+    background: var(--noir);
+    color: var(--dore) !important;
+}
