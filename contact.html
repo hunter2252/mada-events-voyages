@@ -14,9 +14,9 @@
             text-align: center;
             border: 1px solid #ddd;
         }
-        .cta-box h3 { color: var(--noir); font-size: 1.4em; margin-bottom: 20px; font-weight: normal; }
+        .cta-box h3 { color: var(--noir); font-size: 1.4em; margin-bottom: 20px; }
         .cta-box p { color: #555; margin-bottom: 30px; line-height: 1.8; }
-        .btn-googleform {
+        .btn-email {
             display: inline-block;
             background: var(--dore);
             color: var(--noir);
@@ -26,9 +26,8 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: bold;
-            transition: all 0.3s;
         }
-        .btn-googleform:hover { background: var(--noir); color: var(--dore); }
+        .btn-email:hover { background: var(--noir); color: var(--dore); }
         .info-box {
             background: #faf7f2;
             border-left: 3px solid var(--dore);
@@ -36,6 +35,16 @@
             margin: 30px auto;
             max-width: 650px;
             line-height: 1.8;
+        }
+        .modele {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 650px;
+            font-size: 0.9em;
+            color: #666;
+            border: 1px solid #eee;
+            text-align: left;
         }
     </style>
 </head>
@@ -56,19 +65,29 @@
 
     <div class="container">
         <h2 class="section-title">Proposer un prestataire</h2>
-        <p class="section-subtitle">Vous connaissez un bon contact ? Aidez-nous a enrichir l'annuaire</p>
+        <p class="section-subtitle">Vous connaissez un bon contact ? Envoyez-nous ses informations</p>
 
         <div class="info-box">
             <strong>Comment ca marche ?</strong><br>
-            1. Cliquez sur le bouton ci-dessous pour ouvrir le formulaire<br>
-            2. Remplissez les informations du prestataire<br>
-            3. Nous le recevons et l'ajoutons a l'annuaire apres verification
+            1. Cliquez sur le bouton ci-dessous<br>
+            2. Votre messagerie s'ouvre avec un modele pre-rempli<br>
+            3. Completez et envoyez — nous l'ajoutons a l'annuaire
+        </div>
+
+        <div class="modele">
+            <strong>Modele du message :</strong><br><br>
+            <strong>Categorie :</strong> (Hebergement / Lieu de reception / Traiteur / Photographe / Videaste / Location vehicules / Fleuriste / Musique / Guide / Wedding planner / Autre)<br>
+            <strong>Nom du prestataire :</strong><br>
+            <strong>Ville / Region :</strong><br>
+            <strong>Telephone / WhatsApp :</strong><br>
+            <strong>Email :</strong><br>
+            <strong>Description :</strong><br>
         </div>
 
         <div class="cta-box">
-            <h3>Formulaire de proposition</h3>
-            <p>Hebergement, lieu de reception, photographe, guide, traiteur...<br>Tous les prestataires sont les bienvenus.</p>
-            <a href="https://forms.gle/2DDmqfUL5oF86aJ79" class="btn-googleform" target="_blank">Ouvrir le formulaire</a>
+            <h3>Envoyer une proposition</h3>
+            <p>Votre messagerie s'ouvrira automatiquement.<br>Completez le message et envoyez.</p>
+            <a href="mailto:hunter_mg@proton.me?subject=Proposition%20prestataire%20-%20Mada%20Events%20%26%20Voyages&body=Categorie%20%3A%20%0ANom%20du%20prestataire%20%3A%20%0AVille%20%2F%20Region%20%3A%20%0ATelephone%20%2F%20WhatsApp%20%3A%20%0AEmail%20%3A%20%0ADescription%20%3A%20" class="btn-email" target="_blank">Ouvrir la messagerie</a>
         </div>
     </div>
 
