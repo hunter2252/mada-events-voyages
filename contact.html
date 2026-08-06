@@ -6,170 +6,75 @@
     <title>Contact - Mada Events & Voyages</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .contact-form {
-            background: var(--blanc);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
-            max-width: 700px;
-            margin: 0 auto;
+        .cta-box {
+            background: var(--fond-carte);
+            padding: 50px;
+            max-width: 650px;
+            margin: 40px auto;
+            text-align: center;
+            border: 1px solid #ddd;
         }
-        .contact-form label {
-            display: block;
-            color: var(--vert-foret);
-            font-weight: bold;
-            margin: 20px 0 8px 0;
-        }
-        .contact-form input,
-        .contact-form select,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+        .cta-box h3 { color: var(--noir); font-size: 1.4em; margin-bottom: 20px; font-weight: normal; }
+        .cta-box p { color: #555; margin-bottom: 30px; line-height: 1.8; }
+        .btn-googleform {
+            display: inline-block;
+            background: var(--dore);
+            color: var(--noir);
+            padding: 16px 35px;
+            text-decoration: none;
             font-size: 1em;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-        .contact-form input:focus,
-        .contact-form select:focus,
-        .contact-form textarea:focus {
-            border-color: var(--vert-foret);
-            outline: none;
-        }
-        .contact-form textarea {
-            height: 120px;
-            resize: vertical;
-        }
-        .contact-form button {
-            background: linear-gradient(135deg, var(--corail), #f4a261);
-            color: var(--blanc);
-            border: none;
-            padding: 15px 35px;
-            border-radius: 30px;
-            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             font-weight: bold;
-            cursor: pointer;
-            margin-top: 25px;
-            width: 100%;
             transition: all 0.3s;
         }
-        .contact-form button:hover {
-            background: linear-gradient(135deg, #d45d3a, #e67e22);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(231,111,81,0.4);
-        }
+        .btn-googleform:hover { background: var(--noir); color: var(--dore); }
         .info-box {
-            background: #e8f5e9;
-            border-left: 4px solid var(--vert-foret);
-            padding: 15px 20px;
-            border-radius: 0 8px 8px 0;
+            background: #faf7f2;
+            border-left: 3px solid var(--dore);
+            padding: 20px;
             margin: 30px auto;
-            max-width: 700px;
+            max-width: 650px;
+            line-height: 1.8;
         }
     </style>
-    <link rel="stylesheet" href="css/ambiance.css">
 </head>
 <body>
 
+    <div class="annonce-vacances">◆ Proposez un prestataire ◆</div>
+
     <nav>
-        <a href="index.html" class="logo">🌴 Mada Events & Voyages</a>
+        <a href="index.html" class="logo">Mada Events & Voyages</a>
         <ul class="menu">
             <li><a href="index.html">Accueil</a></li>
             <li><a href="prestataires/index.html">Prestataires</a></li>
-            <li><a href="regions.html">Régions</a></li>
+            <li><a href="regions.html">Regions</a></li>
             <li><a href="carte.html">Carte</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <h2 class="section-title">📣 Proposer un prestataire</h2>
-        <p class="section-subtitle">Vous connaissez un bon contact ? Aidez-nous à enrichir l'annuaire !</p>
+        <h2 class="section-title">Proposer un prestataire</h2>
+        <p class="section-subtitle">Vous connaissez un bon contact ? Aidez-nous a enrichir l'annuaire</p>
 
         <div class="info-box">
-            <strong>💡 Comment ça marche ?</strong><br>
-            Remplissez ce formulaire avec les informations du prestataire. Après vérification, nous l'ajouterons à l'annuaire. Merci de ne soumettre que des contacts que vous avez personnellement testés ou dont vous êtes sûr de la fiabilité.
+            <strong>Comment ca marche ?</strong><br>
+            1. Cliquez sur le bouton ci-dessous pour ouvrir le formulaire<br>
+            2. Remplissez les informations du prestataire<br>
+            3. Nous le recevons et l'ajoutons a l'annuaire apres verification
         </div>
 
-        <div class="contact-form">
-            <label for="categorie">Catégorie *</label>
-            <select id="categorie" required>
-                <option value="">-- Choisir --</option>
-                <option value="hebergement">🏨 Hébergement</option>
-                <option value="reception">💒 Lieu de réception</option>
-                <option value="traiteur">🍽️ Traiteur</option>
-                <option value="photo">📸 Photographe</option>
-                <option value="video">🎥 Vidéaste</option>
-                <option value="vehicule">🚗 Location de véhicules</option>
-                <option value="fleuriste">💐 Fleuriste / Déco</option>
-                <option value="musique">🎵 Animation / Musique</option>
-                <option value="guide">🧭 Guide touristique</option>
-                <option value="planner">💍 Wedding planner</option>
-                <option value="autre">✨ Autre</option>
-            </select>
-
-            <label for="nom">Nom du prestataire *</label>
-            <input type="text" id="nom" placeholder="Ex : Hôtel Le Paradis" required>
-
-            <label for="ville">Ville / Région *</label>
-            <input type="text" id="ville" placeholder="Ex : Nosy Be, Antananarivo..." required>
-
-            <label for="telephone">Téléphone / WhatsApp *</label>
-            <input type="text" id="telephone" placeholder="Ex : +261 32 XX XXX XX" required>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Ex : contact@hotel.com">
-
-            <label for="description">Description / Spécificités</label>
-            <textarea id="description" placeholder="Décrivez le prestataire, ses spécialités, pourquoi vous le recommandez..."></textarea>
-
-            <label for="contactNom">Votre nom (facultatif)</label>
-            <input type="text" id="contactNom" placeholder="Pour qu'on sache qui remercier !">
-
-            <button onclick="soumettre()">📤 Envoyer la proposition</button>
-            <p id="confirmation" style="display:none; color: var(--vert-foret); text-align: center; margin-top: 15px; font-weight: bold;">
-                ✅ Merci ! Proposition envoyée avec succès.
-            </p>
+        <div class="cta-box">
+            <h3>Formulaire de proposition</h3>
+            <p>Hebergement, lieu de reception, photographe, guide, traiteur...<br>Tous les prestataires sont les bienvenus.</p>
+            <a href="https://forms.gle/2DDmqfUL5oF86aJ79" class="btn-googleform" target="_blank">Ouvrir le formulaire</a>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 Madagascar Events & Voyages — Le carnet d'adresses de la Grande Île</p>
-        <p><small>📧 Contact : mada.events.voyages@gmail.com</small></p>
+        <p>2026 Madagascar Events & Voyages</p>
     </footer>
 
-    <script>
-        function soumettre() {
-            const categorie = document.getElementById('categorie').value;
-            const nom = document.getElementById('nom').value;
-            const ville = document.getElementById('ville').value;
-            const telephone = document.getElementById('telephone').value;
-
-            if (!categorie || !nom || !ville || !telephone) {
-                alert('Veuillez remplir tous les champs obligatoires (*)');
-                return;
-            }
-
-            // Simulation : dans un vrai site, on enverrait ça par email ou API
-            document.getElementById('confirmation').style.display = 'block';
-            
-            // Réinitialiser le formulaire
-            document.getElementById('categorie').value = '';
-            document.getElementById('nom').value = '';
-            document.getElementById('ville').value = '';
-            document.getElementById('telephone').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('description').value = '';
-            document.getElementById('contactNom').value = '';
-
-            // Cacher le message après 5 secondes
-            setTimeout(() => {
-                document.getElementById('confirmation').style.display = 'none';
-            }, 5000);
-        }
-    </script>
-
-    <script src="js/ambiance.js"></script>
 </body>
 </html>
