@@ -72,14 +72,16 @@
             transition: all 0.3s;
         }
         .formulaire-box button:hover { background: var(--noir); color: var(--dore); }
-        .confirmation {
+        #formMsg {
             display: none;
             text-align: center;
-            color: var(--dore);
-            font-weight: bold;
+            padding: 15px;
             margin-top: 15px;
+            font-weight: bold;
             letter-spacing: 1px;
         }
+        #formMsg.success { display: block; color: var(--dore); }
+        #formMsg.error { display: block; color: #c0392b; }
     </style>
 </head>
 <body>
@@ -104,9 +106,9 @@
         <div class="contact-grid">
             <div class="contact-card">
                 <div class="icon">✉️</div>
-                <h3>Email</h3>
-                <p>Ou utilisez le formulaire ci-dessous</p>
-                <a href="#formulaire" class="btn-contact">Formulaire</a>
+                <h3>Formulaire</h3>
+                <p>Proposez un prestataire</p>
+                <a href="#formulaire" class="btn-contact">Ecrire</a>
             </div>
             <div class="contact-card">
                 <div class="icon">💬</div>
@@ -127,8 +129,11 @@
             <p style="text-align:center;color:#555;margin-bottom:25px;">Remplissez et envoyez. Nous recevons votre proposition directement.</p>
             
             <form id="formProposal">
+                <input type="hidden" name="access_key" value="71ecb337-5862-40c8-bbea-70b5b489517e">
+                <input type="hidden" name="subject" value="Proposition prestataire - Mada Events & Voyages">
+
                 <label>Categorie *</label>
-                <select id="cat" required>
+                <select name="Categorie" required>
                     <option value="">-- Choisir --</option>
                     <option>Hebergement</option>
                     <option>Lieu de reception</option>
@@ -144,23 +149,23 @@
                 </select>
 
                 <label>Nom du prestataire *</label>
-                <input type="text" id="nom" placeholder="Ex : Hotel Le Paradis" required>
+                <input type="text" name="Nom" placeholder="Ex : Hotel Le Paradis" required>
 
                 <label>Ville / Region *</label>
-                <input type="text" id="ville" placeholder="Ex : Nosy Be, Antananarivo..." required>
+                <input type="text" name="Ville" placeholder="Ex : Nosy Be, Antananarivo..." required>
 
                 <label>Telephone / WhatsApp *</label>
-                <input type="text" id="tel" placeholder="Ex : +261 32 XX XXX XX" required>
+                <input type="text" name="Telephone" placeholder="Ex : +261 32 XX XXX XX" required>
 
                 <label>Email</label>
-                <input type="email" id="email" placeholder="Ex : contact@hotel.com">
+                <input type="email" name="Email" placeholder="Ex : contact@hotel.com">
 
                 <label>Description</label>
-                <textarea id="desc" placeholder="Decrivez le prestataire, ses specialites..."></textarea>
+                <textarea name="Description" placeholder="Decrivez le prestataire, ses specialites..."></textarea>
 
                 <button type="submit">Envoyer la proposition</button>
             </form>
-            <p class="confirmation" id="confirm">Merci ! Proposition envoyee avec succes.</p>
+            <div id="formMsg"></div>
         </div>
     </div>
 
@@ -169,16 +174,33 @@
     </footer>
 
     <script>
-        document.getElementById('formProposal').addEventListener('submit', function(e) {
+        const form = document.getElementById('formProposal');
+        const msg = document.getElementById('formMsg');
+
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            var body = 'Categorie : ' + document.getElementById('cat').value + '%0D%0A';
-            body += 'Nom : ' + document.getElementById('nom').value + '%0D%0A';
-            body += 'Ville : ' + document.getElementById('ville').value + '%0D%0A';
-            body += 'Telephone : ' + document.getElementById('tel').value + '%0D%0A';
-            body += 'Email : ' + document.getElementById('email').value + '%0D%0A';
-            body += 'Description : ' + document.getElementById('desc').value;
+            const formData = new FormData(form);
             
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    msg.className = 'success';
+                    msg.textContent = 'Merci ! Proposition envoyee avec succes.';
+                    form.reset();
+                } else {
+                    msg.className = 'error';
+                    msg.textContent = 'Erreur : ' + (data.message || 'Veuillez reessayer.');
+                }
+            } catch (error) {
+                msg.className = 'error';
+                msg.textContent = 'Erreur reseau. Veuillez reessayer.';
+            }
         });
     </script>
 
