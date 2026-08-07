@@ -72,16 +72,18 @@
             transition: all 0.3s;
         }
         .formulaire-box button:hover { background: var(--noir); color: var(--dore); }
-        #formMsg {
+        .confirmation-box {
             display: none;
+            background: #2d5a3f;
+            color: #f0e6d3;
             text-align: center;
-            padding: 15px;
-            margin-top: 15px;
+            padding: 20px;
+            margin-top: 20px;
             font-weight: bold;
             letter-spacing: 1px;
+            font-size: 1.1em;
         }
-        #formMsg.success { display: block; color: var(--dore); }
-        #formMsg.error { display: block; color: #c0392b; }
+        .confirmation-box.show { display: block; }
     </style>
 </head>
 <body>
@@ -131,6 +133,7 @@
             <form id="formProposal">
                 <input type="hidden" name="access_key" value="71ecb337-5862-40c8-bbea-70b5b489517e">
                 <input type="hidden" name="subject" value="Proposition prestataire - Mada Events & Voyages">
+                <input type="hidden" name="redirect" value="false">
 
                 <label>Categorie *</label>
                 <select name="Categorie" required>
@@ -165,7 +168,7 @@
 
                 <button type="submit">Envoyer la proposition</button>
             </form>
-            <div id="formMsg"></div>
+            <div class="confirmation-box" id="confirmationBox">Message envoye avec succes ! Nous vous remercions pour votre proposition. Nous l'ajouterons a l'annuaire apres verification.</div>
         </div>
     </div>
 
@@ -175,7 +178,7 @@
 
     <script>
         const form = document.getElementById('formProposal');
-        const msg = document.getElementById('formMsg');
+        const confirmBox = document.getElementById('confirmationBox');
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -190,16 +193,14 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    msg.className = 'success';
-                    msg.textContent = 'Merci ! Proposition envoyee avec succes.';
+                    confirmBox.className = 'confirmation-box show';
                     form.reset();
+                    setTimeout(() => { confirmBox.className = 'confirmation-box'; }, 8000);
                 } else {
-                    msg.className = 'error';
-                    msg.textContent = 'Erreur : ' + (data.message || 'Veuillez reessayer.');
+                    alert('Erreur : ' + (data.message || 'Veuillez reessayer.'));
                 }
             } catch (error) {
-                msg.className = 'error';
-                msg.textContent = 'Erreur reseau. Veuillez reessayer.';
+                alert('Erreur reseau. Veuillez reessayer.');
             }
         });
     </script>
