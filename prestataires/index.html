@@ -16,7 +16,7 @@
             display: inline-block;
         }
         .contact-card {
-            background: url(../images/Prestataire.jpg); background-size: cover; background-position: center; background-attachment: fixed;
+            background: var(--blanc);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -45,7 +45,7 @@
         }
         .whatsapp-btn:hover { background: #128C7E; transform: translateY(-2px); }
         .filter-bar {
-            background: url(../images/Prestataire.jpg); background-size: cover; background-position: center; background-attachment: fixed;
+            background: var(--blanc);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 40px;
@@ -91,7 +91,8 @@
     </style>
     <link rel="stylesheet" href="../css/ambiance.css">
 </head>
-<body style="background-image: url(../images/Prestataire.jpg); background-size: cover; background-position: center; background-attachment: fixed;">
+<body style="background: url(../images/Prestataire.jpg) center/cover fixed;">
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:0;pointer-events:none;"></div>
     <div class="particules" id="particules"></div>
     <div class="annonce-vacances"><span>◆</span> Découvrez la Grande Île — Votre voyage commence ici ! <span>◆</span></div>
 
