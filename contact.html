@@ -6,51 +6,108 @@
     <title>Contact - Mada Events & Voyages</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .cta-box {
-            background: var(--fond-carte);
-            padding: 50px;
-            max-width: 650px;
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
             margin: 40px auto;
+        }
+        .contact-card {
+            background: var(--fond-carte);
+            padding: 40px 30px;
             text-align: center;
             border: 1px solid #ddd;
+            transition: all 0.3s;
         }
-        .cta-box h3 { color: var(--noir); font-size: 1.4em; margin-bottom: 20px; }
-        .cta-box p { color: #555; margin-bottom: 30px; line-height: 1.8; }
-        .btn-email {
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: var(--dore);
+        }
+        .contact-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .contact-card h3 {
+            color: var(--noir);
+            margin-bottom: 10px;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+        .contact-card p {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        .contact-card .btn-contact {
             display: inline-block;
             background: var(--dore);
             color: var(--noir);
-            padding: 16px 35px;
+            padding: 12px 25px;
             text-decoration: none;
-            font-size: 1em;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: bold;
+            font-size: 0.85em;
+            transition: all 0.3s;
         }
-        .btn-email:hover { background: var(--noir); color: var(--dore); }
-        .info-box {
-            background: #faf7f2;
-            border-left: 3px solid var(--dore);
-            padding: 20px;
-            margin: 30px auto;
-            max-width: 650px;
-            line-height: 1.8;
+        .contact-card .btn-contact:hover {
+            background: var(--noir);
+            color: var(--dore);
         }
-        .modele {
-            background: #f9f9f9;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 650px;
-            font-size: 0.9em;
-            color: #666;
-            border: 1px solid #eee;
-            text-align: left;
+        .formulaire-box {
+            background: var(--fond-carte);
+            padding: 40px;
+            max-width: 700px;
+            margin: 50px auto;
+            border: 1px solid #ddd;
+        }
+        .formulaire-box h3 {
+            text-align: center;
+            color: var(--noir);
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .formulaire-box label {
+            display: block;
+            color: var(--noir);
+            font-weight: bold;
+            margin: 15px 0 5px;
+        }
+        .formulaire-box input,
+        .formulaire-box select,
+        .formulaire-box textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+            font-size: 0.95em;
+        }
+        .formulaire-box textarea { height: 100px; }
+        .formulaire-box button {
+            background: var(--dore);
+            color: var(--noir);
+            border: none;
+            padding: 14px;
+            width: 100%;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .formulaire-box button:hover {
+            background: var(--noir);
+            color: var(--dore);
         }
     </style>
 </head>
 <body>
 
-    <div class="annonce-vacances">◆ Proposez un prestataire ◆</div>
+    <div class="annonce-vacances">◆ Contactez-nous ◆</div>
 
     <nav>
         <a href="index.html" class="logo">Mada Events & Voyages</a>
@@ -64,30 +121,73 @@
     </nav>
 
     <div class="container">
-        <h2 class="section-title">Proposer un prestataire</h2>
-        <p class="section-subtitle">Vous connaissez un bon contact ? Envoyez-nous ses informations</p>
+        <h2 class="section-title">Contact</h2>
+        <p class="section-subtitle">Une question ? Une proposition ? Contactez-nous</p>
 
-        <div class="info-box">
-            <strong>Comment ca marche ?</strong><br>
-            1. Cliquez sur le bouton ci-dessous<br>
-            2. Votre messagerie s'ouvre avec un modele pre-rempli<br>
-            3. Completez et envoyez — nous l'ajoutons a l'annuaire
+        <!-- Cartes de contact -->
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="icon">✉️</div>
+                <h3>Email</h3>
+                <p>Envoyez-nous un message</p>
+                <a href="mailto:hunter_mg@proton.me" class="btn-contact">Ecrire</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">💬</div>
+                <h3>WhatsApp</h3>
+                <p>Discutez avec nous</p>
+                <a href="https://wa.me/261341223232" class="btn-contact">WhatsApp</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">📘</div>
+                <h3>Facebook</h3>
+                <p>Suivez notre page</p>
+                <a href="https://facebook.com/belledujour" class="btn-contact" target="_blank">Facebook</a>
+            </div>
         </div>
 
-        <div class="modele">
-            <strong>Modele du message :</strong><br><br>
-            <strong>Categorie :</strong> (Hebergement / Lieu de reception / Traiteur / Photographe / Videaste / Location vehicules / Fleuriste / Musique / Guide / Wedding planner / Autre)<br>
-            <strong>Nom du prestataire :</strong><br>
-            <strong>Ville / Region :</strong><br>
-            <strong>Telephone / WhatsApp :</strong><br>
-            <strong>Email :</strong><br>
-            <strong>Description :</strong><br>
-        </div>
+        <!-- Formulaire de proposition -->
+        <div class="formulaire-box">
+            <h3>Proposer un prestataire</h3>
+            <p style="text-align:center;color:#555;margin-bottom:25px;">Remplissez ce formulaire pour ajouter un professionnel a l'annuaire</p>
+            
+            <form action="mailto:hunter_mg@proton.me?subject=Proposition%20prestataire" method="POST" enctype="text/plain">
+                <label>Categorie *</label>
+                <select name="Categorie" required>
+                    <option value="">-- Choisir --</option>
+                    <option>Hebergement</option>
+                    <option>Lieu de reception</option>
+                    <option>Traiteur</option>
+                    <option>Photographe</option>
+                    <option>Videaste</option>
+                    <option>Location de vehicules</option>
+                    <option>Fleuriste / Deco</option>
+                    <option>Animation / Musique</option>
+                    <option>Guide touristique</option>
+                    <option>Wedding planner</option>
+                    <option>Autre</option>
+                </select>
 
-        <div class="cta-box">
-            <h3>Envoyer une proposition</h3>
-            <p>Votre messagerie s'ouvrira automatiquement.<br>Completez le message et envoyez.</p>
-            <a href="mailto:hunter_mg@proton.me?subject=Proposition%20prestataire%20-%20Mada%20Events%20%26%20Voyages&body=Categorie%20%3A%20%0ANom%20du%20prestataire%20%3A%20%0AVille%20%2F%20Region%20%3A%20%0ATelephone%20%2F%20WhatsApp%20%3A%20%0AEmail%20%3A%20%0ADescription%20%3A%20" class="btn-email" target="_blank">Ouvrir la messagerie</a>
+                <label>Nom du prestataire *</label>
+                <input type="text" name="Nom" placeholder="Ex : Hotel Le Paradis" required>
+
+                <label>Ville / Region *</label>
+                <input type="text" name="Ville" placeholder="Ex : Nosy Be, Antananarivo..." required>
+
+                <label>Telephone / WhatsApp *</label>
+                <input type="text" name="Telephone" placeholder="Ex : +261 32 XX XXX XX" required>
+
+                <label>Email</label>
+                <input type="email" name="Email" placeholder="Ex : contact@hotel.com">
+
+                <label>Description</label>
+                <textarea name="Description" placeholder="Decrivez le prestataire, ses specialites..."></textarea>
+
+                <label>Votre nom (facultatif)</label>
+                <input type="text" name="Votre nom" placeholder="Pour vous remercier">
+
+                <button type="submit">Envoyer la proposition</button>
+            </form>
         </div>
     </div>
 
