@@ -425,3 +425,12 @@ body::before {
     pointer-events: none;
     z-index: -1;
 }
+
+/* ========== FOND PRESTATAIRES ========== */
+.prestataires-page body,
+body.prestataires-bg {
+    background-image: url('../images/Prestataire.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
