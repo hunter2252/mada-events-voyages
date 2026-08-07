@@ -405,3 +405,23 @@ footer a {
     background: var(--noir);
     color: var(--dore) !important;
 }
+
+/* ========== FOND ACCUEIL ========== */
+body {
+    background-image: url('../images/accueil.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    pointer-events: none;
+    z-index: -1;
+}
