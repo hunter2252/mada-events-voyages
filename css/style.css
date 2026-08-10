@@ -33,17 +33,6 @@ body {
     position: relative;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--dore), var(--dore-clair), var(--dore), transparent);
-    pointer-events: none;
-    z-index: 10000;
-}
 
 /* ========== NAVIGATION ========== */
 nav {
@@ -407,21 +396,6 @@ footer a {
 }
 
 /* ========== FOND ACCUEIL ========== */
-body {
-    background-image: url('../images/accueil.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
     z-index: -1;
 }
 
