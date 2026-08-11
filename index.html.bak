@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madagascar Events & Voyages</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/ambiance.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ambiance.css">
 </head>
 <body>
 
@@ -22,9 +22,9 @@
         <a href="index.html" class="logo">Mada Events & Voyages</a>
         <ul class="menu">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="fiches/prestataires/index.html">Prestataires</a></li>
-            <li><a href="pages/carte.html">Carte</a></li>
-            <li><a href="pages/contact.html">Contact</a></li>
+            <li><a href="prestataires/index.html">Prestataires</a></li>
+            <li><a href="carte.html">Carte</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
@@ -33,8 +33,8 @@
         <h1>Madagascar Events & Voyages</h1>
         <p>Trouvez le lieu parfait, pour un jour ou pour des vacances.</p>
         <div class="btn-group">
-            <a href="fiches/prestataires/index.html" class="btn btn-outline">Prestataires</a>
-            <a href="pages/carte.html" class="btn btn-primary">Explorer la carte</a>
+            <a href="prestataires/index.html" class="btn btn-outline">Prestataires</a>
+            <a href="carte.html" class="btn btn-primary">Explorer la carte</a>
         </div>
     </section>
 
@@ -71,7 +71,7 @@
                     <span class="card-tag">Mariage</span>
                     <h3>Organiser son mariage a Madagascar</h3>
                     <p>Lieux de reception, traiteurs, photographes : tout ce qu'il vous faut pour un jour inoubliable.</p>
-                    <a href="fiches/prestataires/index.html" class="btn-card">Voir les prestataires</a>
+                    <a href="prestataires/index.html" class="btn-card">Voir les prestataires</a>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
                     <span class="card-tag">Voyage</span>
                     <h3>Guides et hebergements</h3>
                     <p>Des guides locaux passionnes et des hebergements de charme pour un sejour authentique.</p>
-                    <a href="pages/carte.html" class="btn-card">Explorer la carte</a>
+                    <a href="carte.html" class="btn-card">Explorer la carte</a>
                 </div>
             </div>
 
@@ -101,7 +101,7 @@
                     <span class="card-tag">Experiences</span>
                     <h3>Lune de miel & Aventures</h3>
                     <p>Road trips, treks, plongee : des souvenirs graves a jamais dans la nature malgache.</p>
-                    <a href="fiches/prestataires/index.html" class="btn-card">Trouver un guide</a>
+                    <a href="prestataires/index.html" class="btn-card">Trouver un guide</a>
                 </div>
             </div>
 
@@ -132,7 +132,7 @@
         updateCompteur();
         setInterval(updateCompteur, 3600000);
     </script>
-    <script src="assets/js/ambiance.js"></script>
+    <script src="js/ambiance.js"></script>
 
 </body>
 </html>

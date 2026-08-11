@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Mada Events & Voyages</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        .contact-card {
+            background: var(--fond-carte);
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+        .contact-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-color: var(--dore); }
+        .contact-card .icon { font-size: 3em; margin-bottom: 15px; }
+        .contact-card h3 { color: var(--noir); margin-bottom: 10px; font-weight: normal; letter-spacing: 2px; }
+        .contact-card p { color: #555; margin-bottom: 20px; font-size: 0.9em; }
+        .contact-card .btn-contact {
+            display: inline-block;
+            background: var(--dore);
+            color: var(--noir);
+            padding: 12px 25px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: all 0.3s;
+        }
+        .contact-card .btn-contact:hover { background: var(--noir); color: var(--dore); }
+        .formulaire-box {
+            background: var(--fond-carte);
+            padding: 40px;
+            max-width: 700px;
+            margin: 50px auto;
+            border: 1px solid #ddd;
+        }
+        .formulaire-box h3 { text-align: center; color: var(--noir); font-weight: normal; letter-spacing: 2px; margin-bottom: 10px; }
+        .formulaire-box label { display: block; color: var(--noir); font-weight: bold; margin: 15px 0 5px; }
+        .formulaire-box input,
+        .formulaire-box select,
+        .formulaire-box textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+            font-size: 0.95em;
+            background: var(--blanc);
+        }
+        .formulaire-box textarea { height: 100px; resize: vertical; }
+        .formulaire-box button {
+            background: var(--dore);
+            color: var(--noir);
+            border: none;
+            padding: 14px;
+            width: 100%;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        .formulaire-box button:hover { background: var(--noir); color: var(--dore); }
+        .confirmation-box {
+            display: none;
+            background: #2d5a3f;
+            color: #f0e6d3;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 1.1em;
+        }
+        .confirmation-box.show { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="annonce-vacances">◆ Contactez-nous ◆</div>
+
+    <nav>
+        <a href="../index.html" class="logo">Mada Events & Voyages</a>
+        <ul class="menu">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="../fiches/prestataires/index.html">Prestataires</a></li>
+            <li><a href="carte.html">Carte</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-subtitle">Une question ? Une proposition ? Contactez-nous</p>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="icon">✉️</div>
+                <h3>Formulaire</h3>
+                <p>Proposez un prestataire</p>
+                <a href="#formulaire" class="btn-contact">Ecrire</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">💬</div>
+                <h3>WhatsApp</h3>
+                <p>+261 34 12 232 32</p>
+                <a href="https://wa.me/261341223232" class="btn-contact" target="_blank">WhatsApp</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">📘</div>
+                <h3>Facebook</h3>
+                <p>Mada Events & Voyages</p>
+                <a href="https://facebook.com/belledujour" class="btn-contact" target="_blank">Facebook</a>
+            </div>
+        </div>
+
+        <div class="formulaire-box" id="formulaire">
+            <h3>Proposer un prestataire</h3>
+            <p style="text-align:center;color:#555;margin-bottom:25px;">Remplissez et envoyez. Nous recevons votre proposition directement.</p>
+            
+            <form id="formProposal">
+                <input type="hidden" name="access_key" value="71ecb337-5862-40c8-bbea-70b5b489517e">
+                <input type="hidden" name="subject" value="Proposition prestataire - Mada Events & Voyages">
+                <input type="hidden" name="redirect" value="false">
+
+                <label>Categorie *</label>
+                <select name="Categorie" required>
+                    <option value="">-- Choisir --</option>
+                    <option>Hebergement</option>
+                    <option>Lieu de reception</option>
+                    <option>Traiteur</option>
+                    <option>Photographe</option>
+                    <option>Videaste</option>
+                    <option>Location de vehicules</option>
+                    <option>Fleuriste / Deco</option>
+                    <option>Animation / Musique</option>
+                    <option>Guide touristique</option>
+                    <option>Wedding planner</option>
+                    <option>Autre</option>
+                </select>
+
+                <label>Nom du prestataire *</label>
+                <input type="text" name="Nom" placeholder="Ex : Hotel Le Paradis" required>
+
+                <label>Ville / Region *</label>
+                <input type="text" name="Ville" placeholder="Ex : Nosy Be, Antananarivo..." required>
+
+                <label>Telephone / WhatsApp *</label>
+                <input type="text" name="Telephone" placeholder="Ex : +261 32 XX XXX XX" required>
+
+                <label>Email</label>
+                <input type="email" name="Email" placeholder="Ex : contact@hotel.com">
+
+                <label>Description</label>
+                <textarea name="Description" placeholder="Decrivez le prestataire, ses specialites..."></textarea>
+
+                <button type="submit">Envoyer la proposition</button>
+            </form>
+            <div class="confirmation-box" id="confirmationBox">Message envoye avec succes ! Nous vous remercions pour votre proposition. Nous l'ajouterons a l'annuaire apres verification.</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>2026 Madagascar Events & Voyages</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('formProposal');
+        const confirmBox = document.getElementById('confirmationBox');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    confirmBox.className = 'confirmation-box show';
+                    form.reset();
+                    setTimeout(() => { confirmBox.className = 'confirmation-box'; }, 8000);
+                } else {
+                    alert('Erreur : ' + (data.message || 'Veuillez reessayer.'));
+                }
+            } catch (error) {
+                alert('Erreur reseau. Veuillez reessayer.');
+            }
+        });
+    </script>
+
+</body>
+</html>
+

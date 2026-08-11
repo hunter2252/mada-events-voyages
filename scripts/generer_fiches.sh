@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FICHES_DIR="prestataires/fiches"
+FICHES_DIR="fiches/prestataires"
 mkdir -p "$FICHES_DIR"
 
 # Fonction pour créer un slug (nom simplifié pour l'URL)
