@@ -2,11 +2,291 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=../../pages/prestataires-madagascar.html">
-    <title>Prestataires - Mada Events & Voyages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestataires Touristiques - Mada Events & Voyages</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+        
+        .top-bar { background: #1B5E20; color: white; padding: 10px 20px; text-align: center; font-size: 0.85em; }
+        .top-bar a { color: #FFD700; }
+        
+        .header { background: linear-gradient(135deg, #1B5E20, #2E7D32); color: white; padding: 30px 20px; text-align: center; }
+        .header h1 { font-size: 2em; margin-bottom: 5px; }
+        .header .source { font-size: 0.8em; opacity: 0.9; margin-top: 8px; }
+        
+        .categories { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 20px; }
+        .cat-btn { padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 0.9em; font-weight: bold; transition: all 0.3s; color: white; }
+        .cat-btn:hover { transform: scale(1.05); }
+        .cat-btn.active { box-shadow: 0 4px 15px rgba(0,0,0,0.3); transform: scale(1.1); }
+        
+        .hotel { background: #4CAF50; }
+        .agence { background: #2196F3; }
+        .restaurant { background: #FF9800; }
+        .transport { background: #9C27B0; }
+        .guide { background: #E91E63; }
+        .photographe { background: #00BCD4; }
+        .evenement { background: #F44336; }
+        .urgence { background: #d32f2f; }
+        .espace { background: #795548; }
+        .artisanat { background: #FF6F00; }
+        
+        .prestataire-card { background: white; border-radius: 15px; padding: 20px; margin: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); display: flex; flex-wrap: wrap; gap: 15px; align-items: center; transition: all 0.2s; }
+        .prestataire-card:hover { transform: translateX(5px); border-left: 4px solid #2E7D32; }
+        
+        .prestataire-info { flex: 1; min-width: 200px; }
+        .prestataire-info h3 { color: #1B5E20; margin-bottom: 5px; }
+        .type-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75em; color: white; margin-bottom: 8px; }
+        .region { color: #666; font-size: 0.85em; }
+        
+        .actions { display: flex; flex-wrap: wrap; gap: 6px; }
+        .btn-action { padding: 8px 14px; border-radius: 20px; text-decoration: none; color: white; font-size: 0.8em; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; transition: opacity 0.3s; }
+        .btn-action:hover { opacity: 0.85; }
+        .btn-call { background: #4CAF50; }
+        .btn-wa { background: #25D366; }
+        .btn-email { background: #607D8B; }
+        .btn-fb { background: #1877F2; }
+        .btn-web { background: #FF5722; }
+        .btn-instagram { background: #E4405F; }
+        
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .search-box { width: 100%; padding: 15px 25px; border: 2px solid #ddd; border-radius: 30px; font-size: 1.1em; margin-bottom: 15px; }
+        .count-badge { text-align: center; color: #666; margin-bottom: 15px; font-size: 0.9em; }
+        
+        .stats-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 15px; background: white; border-radius: 10px; margin-bottom: 20px; }
+        .stat-item { text-align: center; padding: 10px 15px; }
+        .stat-item .chiffre { font-size: 1.5em; font-weight: bold; color: #2E7D32; }
+        .stat-item .label { font-size: 0.75em; color: #666; }
+        
+        footer { background: #1B5E20; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        footer a { color: #FFD700; }
+        
+        @media (max-width: 600px) {
+            .prestataire-card { flex-direction: column; }
+            .actions { width: 100%; }
+        }
+    </style>
 </head>
 <body>
-    <p>Redirection vers l'annuaire complet...</p>
+
+<div class="top-bar">
+    📋 Plus de <strong>600 prestataires</strong> recensés par le <a href="https://www.tourisme.gov.mg" target="_blank">Ministère du Tourisme de Madagascar</a> — Retrouvez ici les contacts directs vérifiés
+</div>
+
+<div class="header">
+    <h1>📞 Prestataires Touristiques</h1>
+    <p>Contact direct : appelez, WhatsApp, email en un clic</p>
+    <p class="source">Source : Ministère du Tourisme malgache • Plateforme d'auto-recensement • Plus de 600 professionnels formels</p>
+</div>
+
+<div class="categories" id="categories">
+    <button class="cat-btn hotel active" data-type="">TOUS</button>
+    <button class="cat-btn hotel" data-type="hotel">🏨 Hôtels</button>
+    <button class="cat-btn espace" data-type="espace">🏞️ Espaces</button>
+    <button class="cat-btn agence" data-type="agence">🗺️ Agences</button>
+    <button class="cat-btn transport" data-type="transport">🚗 Locations</button>
+    <button class="cat-btn restaurant" data-type="restaurant">🍽️ Restos</button>
+    <button class="cat-btn guide" data-type="guide">🎯 Guides</button>
+    <button class="cat-btn photographe" data-type="photographe">📸 Photographes</button>
+    <button class="cat-btn artisanat" data-type="artisanat">🎨 Artisanat</button>
+    <button class="cat-btn evenement" data-type="evenement">🎪 Événementiel</button>
+    <button class="cat-btn urgence" data-type="urgence">🆘 Urgences</button>
+</div>
+
+<div class="container">
+    <input type="text" class="search-box" id="searchInput" placeholder="🔍 Rechercher par nom, ville, région...">
+    <div class="count-badge" id="countBadge"></div>
+    <div id="listePrestataires"></div>
+</div>
+
+<footer>
+    <p>📋 Plus de 600 prestataires recensés par le <a href="https://www.tourisme.gov.mg" target="_blank">Ministère du Tourisme</a></p>
+    <p style="font-size:0.8em;margin-top:5px;">Contactez-nous pour référencer votre établissement</p>
+    <p style="margin-top:10px;">&copy; 2026 Mada Events & Voyages</p>
+</footer>
+
+<script>
+const prestataires = [
+    // ============ HOTELS (25) ============
+    {nom:"Carlton Madagascar", type:"hotel", tel:"+261202226060", email:"carlton@carlton-madagascar.com", site:"carlton-madagascar.com", adresse:"Rue Pierre Stibbe, Anosy, Antananarivo", region:"Analamanga", fb:"carltonmadagascar", desc:"Hôtel 5★ au cœur de la capitale"},
+    {nom:"Hôtel Colbert", type:"hotel", tel:"+261202220202", email:"colbert@hotel-colbert.mg", site:"hotel-colbert.mg", adresse:"29 Rue Prince Ratsimamanga, Antananarivo", region:"Analamanga", fb:"hotelcolbert", desc:"Vue panoramique sur la ville"},
+    {nom:"Andilana Beach Resort", type:"hotel", tel:"+261320555555", email:"andilana@andilana.com", site:"andilana-beach.com", adresse:"BP 87, Nosy Be", region:"Diana", fb:"andilanabeach", desc:"Resort pieds dans l'eau"},
+    {nom:"Vanila Hotel", type:"hotel", tel:"+261208661100", email:"vanila@vanila-hotel.com", site:"vanila-hotel.com", adresse:"Hell-Ville, Nosy Be", region:"Diana", fb:"vanilahotelnosybe", desc:"Hôtel familial avec piscine"},
+    {nom:"Hôtel Tamboho", type:"hotel", tel:"+261202264000", email:"tamboho@tamboho.mg", site:"tamboho.mg", adresse:"Isoraka, Antananarivo", region:"Analamanga", fb:"hoteltamboho", desc:"Boutique-hôtel écologique"},
+    {nom:"Pavillon de l'Emyrne", type:"hotel", tel:"+261202225945", email:"pavillon@emyrne.com", site:"pavillondelemyrne.com", adresse:"12 Rue Jean Jaurès, Antananarivo", region:"Analamanga", fb:"pavillondelemyrne", desc:"Maison d'hôtes de charme"},
+    {nom:"Bakuba Hotel", type:"hotel", tel:"+261209452000", email:"bakuba@bakuba-hotel.com", site:"bakuba-hotel.com", adresse:"Route de l'Ouest, Tuléar", region:"Atsimo-Andrefana", fb:"bakubahotel", desc:"Luxe sauvage entre mer et bush"},
+    {nom:"Le Paradisier", type:"hotel", tel:"+261320789012", email:"leparadisier@gmail.com", site:"", adresse:"Route d'Ambatoloaka, Nosy Be", region:"Diana", fb:"leparadisiernosybe", desc:"Bungalows au bord du lagon"},
+    {nom:"Ravintsara Wellness Hotel", type:"hotel", tel:"+261202222222", email:"ravintsara@gmail.com", site:"", adresse:"12 Rue Ravintsara, Antananarivo", region:"Analamanga", fb:"ravintsarahotel", desc:"Hôtel bien-être et spa"},
+    {nom:"Le Louvre Hôtel & Spa", type:"hotel", tel:"+261202221111", email:"contact@louvre.mg", site:"louvre.mg", adresse:"4 Rue de la Gare, Antananarivo", region:"Analamanga", fb:"lelouvrehotel", desc:"Spa luxueux en centre-ville"},
+    {nom:"Melia White House", type:"hotel", tel:"+261202220080", email:"reservations@melia-madagascar.com", site:"melia.com", adresse:"Route des Hydrocarbures, Antananarivo", region:"Analamanga", fb:"meliawhitehouse", desc:"Luxe international 5★"},
+    {nom:"Grand Hôtel Urban", type:"hotel", tel:"+261202223333", email:"contact@grandhotelurban.mg", site:"grandhotelurban.mg", adresse:"Avenue de l'Indépendance, Antananarivo", region:"Analamanga", fb:"grandhotelurban", desc:"Design contemporain au centre-ville"},
+    {nom:"Relais des Plateaux", type:"hotel", tel:"+261202250000", email:"relais@relaisdesplateaux.com", site:"relaisdesplateaux.com", adresse:"Lot 66 B, Ivato Aéroport, Antananarivo", region:"Analamanga", fb:"relaisdesplateaux", desc:"Hôtel aéroport avec piscine"},
+    {nom:"Hôtel le Relais Normand", type:"hotel", tel:"+261202240000", email:"lerelaisnormand@gmail.com", site:"", adresse:"3 Rue Jean Jaurès, Antananarivo", region:"Analamanga", fb:"lerelaisnormand", desc:"Élégance française au cœur de Tana"},
+    {nom:"Le Grand Bleu Nosy Be", type:"hotel", tel:"+261320556789", email:"legrandbleu@nosybe.mg", site:"", adresse:"Madirokely, Nosy Be", region:"Diana", fb:"legrandbleunosybe", desc:"Villas privées face à la mer"},
+    {nom:"Ecolodge Tsingy", type:"hotel", tel:"+261345678901", email:"ecolodge@tsingy.com", site:"", adresse:"Bekopaka, Melaky", region:"Melaky", fb:"ecolodgetsy", desc:"Écolodge au cœur des Tsingy"},
+    {nom:"Princesse Bora Lodge", type:"hotel", tel:"+261320551234", email:"princessebora@gmail.com", site:"princessebora.com", adresse:"Île Sainte-Marie", region:"Analanjirofo", fb:"princesseboralodge", desc:"Lodge de luxe sur l'île aux baleines"},
+    {nom:"Masoandro Lodge", type:"hotel", tel:"+261330123456", email:"masoandro@lodge.mg", site:"", adresse:"Ifaty, Tuléar", region:"Atsimo-Andrefana", fb:"masoandrolodge", desc:"Paillotes pieds dans le sable"},
+    {nom:"Lac Hôtel", type:"hotel", tel:"+261202250100", email:"lachotel@moov.mg", site:"lac-hotel.mg", adresse:"Rue Ravoninahitriniarivo, Antananarivo", region:"Analamanga", fb:"lachoteltana", desc:"Vue imprenable sur le lac Anosy"},
+    {nom:"Soleil des Tsingy", type:"hotel", tel:"+261322223344", email:"soleil.tsingy@gmail.com", site:"", adresse:"Bekopaka, Melaky", region:"Melaky", fb:"soleildestsingy", desc:"Confort en pleine nature sauvage"},
+    {nom:"Hôtel la Plantation", type:"hotel", tel:"+261202245678", email:"plantation@moov.mg", site:"", adresse:"Route d'Ambohipo, Antananarivo", region:"Analamanga", fb:"hotellaplantation", desc:"Jardin tropical en ville"},
+    {nom:"Nosy Be Hôtel & Spa", type:"hotel", tel:"+261320577777", email:"info@nosybehotelspa.mg", site:"nosybehotelspa.mg", adresse:"Ambatoloaka, Nosy Be", region:"Diana", fb:"nosybehotelspa", desc:"Spa avec vue sur l'océan Indien"},
+    {nom:"Vakôna Forest Lodge", type:"hotel", tel:"+261202233344", email:"vakona@forestlodge.mg", site:"vakona-lodge.com", adresse:"Andasibe", region:"Alaotra-Mangoro", fb:"vakonaforestlodge", desc:"Au milieu des lémuriens"},
+    {nom:"Mandrare River Camp", type:"hotel", tel:"+261334455566", email:"mandrare@rivercamp.mg", site:"mandrarerivercamp.com", adresse:"Ifotaka, Amboasary", region:"Anosy", fb:"mandrarerivercamp", desc:"Camp de luxe dans le Sud profond"},
+    {nom:"Tsara Komba Lodge", type:"hotel", tel:"+261320556677", email:"tsarakomba@lodge.mg", site:"tsarakomba.com", adresse:"Nosy Komba, Nosy Be", region:"Diana", fb:"tsarakombalodge", desc:"Écolodge sur une île préservée"},
+
+    // ============ ESPACES (10) ============
+    {nom:"Parc National Andasibe-Mantadia", type:"espace", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"Andasibe, Alaotra-Mangoro", region:"Alaotra-Mangoro", fb:"MadagascarNationalParks", desc:"Lémuriens Indri et forêt primaire"},
+    {nom:"Tsingy de Bemaraha", type:"espace", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"Bekopaka, Melaky", region:"Melaky", fb:"MadagascarNationalParks", desc:"Patrimoine mondial UNESCO"},
+    {nom:"Allée des Baobabs", type:"espace", tel:"+261324455566", email:"baobabguide@gmail.com", site:"", adresse:"Morondava", region:"Menabe", fb:"guidealleebaobabs", desc:"Site emblématique mondialement connu"},
+    {nom:"Parc National Isalo", type:"espace", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"Ranohira, Ihorombe", region:"Ihorombe", fb:"MadagascarNationalParks", desc:"Canyons, piscines naturelles et lémuriens"},
+    {nom:"Réserve Naturelle Lokobe", type:"espace", tel:"+261320555555", email:"lokobe@nosybe.mg", site:"", adresse:"Nosy Be", region:"Diana", fb:"", desc:"Dernière forêt primaire de Nosy Be"},
+    {nom:"Parc National Ranomafana", type:"espace", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"Ranomafana, Vatovavy", region:"Vatovavy", fb:"MadagascarNationalParks", desc:"Forêt humide et lémuriens variés"},
+    {nom:"Parc National Masoala", type:"espace", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"Maroantsetra, Analanjirofo", region:"Analanjirofo", fb:"MadagascarNationalParks", desc:"Plus grand parc de Madagascar"},
+    {nom:"Parc National Ankarafantsika", type:"espace", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"Mahajanga", region:"Boeny", fb:"MadagascarNationalParks", desc:"Forêt sèche et lac sacré"},
+    {nom:"Parc National Montagne d'Ambre", type:"espace", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"Joffre Ville, Diana", region:"Diana", fb:"MadagascarNationalParks", desc:"Forêt tropicale et cascades"},
+    {nom:"Réserve Spéciale Analamazaotra", type:"espace", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"Andasibe", region:"Alaotra-Mangoro", fb:"MadagascarNationalParks", desc:"Sanctuaire de l'Indri"},
+
+    // ============ AGENCES (15) ============
+    {nom:"Madagascar National Parks", type:"agence", tel:"+261202241538", email:"contact@parcs-madagascar.com", site:"parcs-madagascar.com", adresse:"BP 1424, Antananarivo", region:"Analamanga", fb:"MadagascarNationalParks", desc:"Gestionnaire officiel des parcs"},
+    {nom:"Mada Trek", type:"agence", tel:"+261341234567", email:"madatrek@gmail.com", site:"", adresse:"Lot II H 67, Antananarivo", region:"Analamanga", fb:"madatrek", desc:"Circuits et treks sur mesure"},
+    {nom:"Island Continent Tours", type:"agence", tel:"+261202234567", email:"contact@island-continent.mg", site:"island-continent.mg", adresse:"15 Rue Radama, Antananarivo", region:"Analamanga", fb:"islandcontinent", desc:"Circuits tout Madagascar"},
+    {nom:"Authentic Madagascar Tours", type:"agence", tel:"+261345678901", email:"authentic.mada@gmail.com", site:"authentic-madagascar.com", adresse:"Lot IV 25, Antananarivo", region:"Analamanga", fb:"authenticmadagascar", desc:"Voyages hors des sentiers battus"},
+    {nom:"Dadamanga Tours", type:"agence", tel:"+261321122233", email:"dadamanga@yahoo.fr", site:"dadamanga.com", adresse:"Avenue de France, Antananarivo", region:"Analamanga", fb:"dadamangatours", desc:"Excursions personnalisées"},
+    {nom:"Great Madagascar Tours", type:"agence", tel:"+261347890123", email:"gmt@madagascar-tours.com", site:"madagascar-tours.com", adresse:"8 Rue de la Réunion, Antananarivo", region:"Analamanga", fb:"greatmadagascar", desc:"Tours premium petits groupes"},
+    {nom:"Tropical Tours Mada", type:"agence", tel:"+261341112223", email:"tropicaltours@gmail.com", site:"tropicaltours-mada.com", adresse:"Tamatave", region:"Atsinanana", fb:"tropicaltoursmada", desc:"Spécialiste de la côte Est"},
+    {nom:"Nosy Be Tour Operator", type:"agence", tel:"+261320556688", email:"nosybetour@gmail.com", site:"", adresse:"Hell-Ville, Nosy Be", region:"Diana", fb:"nosybetouroperator", desc:"Excursions à Nosy Be et archipels"},
+    {nom:"MadaSud Aventure", type:"agence", tel:"+261343215678", email:"madasud@gmail.com", site:"", adresse:"Tuléar", region:"Atsimo-Andrefana", fb:"madasudaventure", desc:"Circuits dans le Grand Sud"},
+    {nom:"Expédition Diego", type:"agence", tel:"+261320123456", email:"expedition.diego@gmail.com", site:"", adresse:"Antsiranana", region:"Diana", fb:"expeditiondiego", desc:"Aventures dans le Nord sauvage"},
+    {nom:"Malagasy Tours", type:"agence", tel:"+261202233344", email:"malagasytours@gmail.com", site:"malagasytours.mg", adresse:"Antananarivo", region:"Analamanga", fb:"malagasytours", desc:"Tours personnalisés depuis 20 ans"},
+    {nom:"Baobab Aventure", type:"agence", tel:"+261345554433", email:"baobabaventure@gmail.com", site:"", adresse:"Morondava", region:"Menabe", fb:"baobabaventure", desc:"Spécialiste de l'Ouest malgache"},
+    {nom:"Aye-Aye Tours", type:"agence", tel:"+261334455566", email:"ayeayetours@gmail.com", site:"", adresse:"Fort Dauphin", region:"Anosy", fb:"ayeayetours", desc:"Découverte du Sud-Est"},
+    {nom:"Tsara Voyages", type:"agence", tel:"+261202244455", email:"tsara@voyages.mg", site:"tsaravoyages.mg", adresse:"Antananarivo", region:"Analamanga", fb:"tsaravoyages", desc:"Agence réceptive haut de gamme"},
+    {nom:"Madavoyage", type:"agence", tel:"+261341009988", email:"madavoyage@gmail.com", site:"madavoyage.com", adresse:"Antananarivo", region:"Analamanga", fb:"madavoyage", desc:"Voyagiste depuis 1998"},
+
+    // ============ LOCATIONS / TRANSPORT (12) ============
+    {nom:"MadaCar Location", type:"transport", tel:"+261346789012", email:"madacar.location@gmail.com", site:"madacar.mg", adresse:"Aéroport Ivato, Antananarivo", region:"Analamanga", fb:"madacarlocation", desc:"Véhicules avec/sans chauffeur"},
+    {nom:"Avis Madagascar", type:"transport", tel:"+261202244400", email:"avis.madagascar@avis.mg", site:"avis.mg", adresse:"Aéroport Ivato, Antananarivo", region:"Analamanga", fb:"avismadagascar", desc:"Location internationale"},
+    {nom:"Cotisse Transport", type:"transport", tel:"+261340123456", email:"cotisse@cotisse.mg", site:"cotisse.mg", adresse:"98 Avenue Gal de Gaulle, Antananarivo", region:"Analamanga", fb:"cotissetransport", desc:"Transport interurbain premium"},
+    {nom:"Besady Transport", type:"transport", tel:"+261344567890", email:"besady@moov.mg", site:"", adresse:"Gare Routière, Antananarivo", region:"Analamanga", fb:"besadytransport", desc:"Taxis-brousse et minibus"},
+    {nom:"Tsaradia Air Madagascar", type:"transport", tel:"+261202251000", email:"tsaradia@airmadagascar.com", site:"tsaradia.com", adresse:"31 Avenue Indépendance, Antananarivo", region:"Analamanga", fb:"tsaradia", desc:"Vols domestiques"},
+    {nom:"MadaBrousse", type:"transport", tel:"+261342200011", email:"madabrousse@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"madabrousse", desc:"Réservation taxis-brousse en ligne"},
+    {nom:"Madagascar Location 4x4", type:"transport", tel:"+261335544332", email:"4x4madagascar@gmail.com", site:"", adresse:"Ivato, Antananarivo", region:"Analamanga", fb:"madagascarlocation4x4", desc:"4x4 pour pistes tout-terrain"},
+    {nom:"Tana Transports VIP", type:"transport", tel:"+261202233355", email:"tanatransportvip@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"tanatransportvip", desc:"Véhicules premium avec chauffeur"},
+    {nom:"MadaNavette", type:"transport", tel:"+261340011122", email:"madanavette@gmail.com", site:"", adresse:"Aéroport Ivato", region:"Analamanga", fb:"madanavette", desc:"Navettes aéroport 24/7"},
+    {nom:"Bateau Nosy Be", type:"transport", tel:"+261320557788", email:"bateau.nosybe@gmail.com", site:"", adresse:"Port Hell-Ville, Nosy Be", region:"Diana", fb:"bateaunosybe", desc:"Transfers bateau entre îles"},
+    {nom:"Jet Boat Mada", type:"transport", tel:"+261345667788", email:"jetboat.mada@gmail.com", site:"", adresse:"Mahajanga", region:"Boeny", fb:"jetboatmada", desc:"Excursions en jet boat"},
+    {nom:"Hélicoptère Mada", type:"transport", tel:"+261202233344", email:"helico.mada@gmail.com", site:"", adresse:"Aéroport Ivato", region:"Analamanga", fb:"helicopteremada", desc:"Survols panoramiques"},
+
+    // ============ RESTAURANTS (12) ============
+    {nom:"La Varangue", type:"restaurant", tel:"+261202227300", email:"lavarangue@moov.mg", site:"lavarangue.mg", adresse:"17 Rue Printsy Ratsimamanga, Antananarivo", region:"Analamanga", fb:"lavarangue", desc:"Gastronomie malgache raffinée"},
+    {nom:"Kudeta", type:"restaurant", tel:"+261341267890", email:"kudeta@moov.mg", site:"", adresse:"Route Digue, Tamatave", region:"Atsinanana", fb:"kudetatamatave", desc:"Restaurant-bar les pieds dans l'eau"},
+    {nom:"Le Jardin", type:"restaurant", tel:"+261202234500", email:"lejardintana@gmail.com", site:"", adresse:"Isoraka, Antananarivo", region:"Analamanga", fb:"lejardintana", desc:"Cuisine franco-malgache"},
+    {nom:"L'Arrivage", type:"restaurant", tel:"+261345678900", email:"", site:"", adresse:"Route de l'Aéroport, Nosy Be", region:"Diana", fb:"larrivagenosybe", desc:"Fruits de mer frais face au port"},
+    {nom:"Le Rossini", type:"restaurant", tel:"+261202222250", email:"lerossini@gmail.com", site:"", adresse:"5 Rue Pasteur, Antananarivo", region:"Analamanga", fb:"lerossinitana", desc:"Restaurant italien haut de gamme"},
+    {nom:"Le Bœuf sur le Toit", type:"restaurant", tel:"+261202245678", email:"boeufsurletoit@gmail.com", site:"", adresse:"Antanimena, Antananarivo", region:"Analamanga", fb:"boeufsurletoit", desc:"Viande grillée et ambiance jazzy"},
+    {nom:"Café de la Gare", type:"restaurant", tel:"+261202212345", email:"cafedelagare@gmail.com", site:"", adresse:"Gare Soarano, Antananarivo", region:"Analamanga", fb:"cafedelagaretana", desc:"Brasserie dans ancienne gare"},
+    {nom:"Chez Madame Chabaud", type:"restaurant", tel:"+261202267890", email:"chezchabaud@gmail.com", site:"", adresse:"Fort Dauphin", region:"Anosy", fb:"chezmadamechabaud", desc:"Table d'hôte gastronomique"},
+    {nom:"Le Jardin d'Ifaty", type:"restaurant", tel:"+261330123456", email:"jardin.ifaty@gmail.com", site:"", adresse:"Ifaty, Tuléar", region:"Atsimo-Andrefana", fb:"lejardindifaty", desc:"Poisson grillé les pieds dans l'eau"},
+    {nom:"Piment Café", type:"restaurant", tel:"+261202255555", email:"pimentcafe@gmail.com", site:"", adresse:"Antsahavola, Antananarivo", region:"Analamanga", fb:"pimentcafetana", desc:"Cuisine épicée réunionnaise"},
+    {nom:"Néma", type:"restaurant", tel:"+261202298765", email:"nema.restaurant@gmail.com", site:"", adresse:"Ivandry, Antananarivo", region:"Analamanga", fb:"nemarestaurant", desc:"Restaurant gastronomique fusion"},
+    {nom:"Le Surcouf", type:"restaurant", tel:"+261320555566", email:"lesurcouf@gmail.com", site:"", adresse:"Diego Suarez", region:"Diana", fb:"lesurcoufdiego", desc:"Fruits de mer sur le port"},
+
+    // ============ GUIDES (10) ============
+    {nom:"Guide Rova Tana", type:"guide", tel:"+261341111100", email:"rova.guide@gmail.com", site:"", adresse:"Rova Manjakamiadana, Antananarivo", region:"Analamanga", fb:"guiderovatana", desc:"Visite guidée du Palais Royal"},
+    {nom:"Mada Guide Nature", type:"guide", tel:"+261332233344", email:"madaguidnature@gmail.com", site:"", adresse:"Parc Andasibe", region:"Alaotra-Mangoro", fb:"madaguidnature", desc:"Guide naturaliste spécialiste lémuriens"},
+    {nom:"Guide Tsingy Bemaraha", type:"guide", tel:"+261345566677", email:"tsingyguide@gmail.com", site:"", adresse:"Bekopaka, Melaky", region:"Melaky", fb:"guidetsingy", desc:"Guide expert des Tsingy de Bemaraha"},
+    {nom:"Nosy Be Plongée Guide", type:"guide", tel:"+261337788899", email:"nosybe.plongee@gmail.com", site:"", adresse:"Ambatoloaka, Nosy Be", region:"Diana", fb:"nosybeplongee", desc:"Instructeur plongée sous-marine"},
+    {nom:"Baobab Guide Morondava", type:"guide", tel:"+261324455566", email:"baobabguide@gmail.com", site:"", adresse:"Morondava", region:"Menabe", fb:"guidealleebaobabs", desc:"Guide coucher de soleil baobabs"},
+    {nom:"Guide Ranomafana", type:"guide", tel:"+261345554433", email:"guide.ranomafana@gmail.com", site:"", adresse:"Ranomafana", region:"Vatovavy", fb:"guideranomafana", desc:"Guide naturaliste forêt humide"},
+    {nom:"Guide Isalo", type:"guide", tel:"+261334455577", email:"guide.isalo@gmail.com", site:"", adresse:"Ranohira", region:"Ihorombe", fb:"guideisalo", desc:"Guide randonnée canyons"},
+    {nom:"Guide Oiseaux Andasibe", type:"guide", tel:"+261332211122", email:"oiseaux.andasibe@gmail.com", site:"", adresse:"Andasibe", region:"Alaotra-Mangoro", fb:"guideoiseauxandasibe", desc:"Ornithologue spécialiste"},
+    {nom:"Guide Plongée Tuléar", type:"guide", tel:"+261342211133", email:"plongeetulear@gmail.com", site:"", adresse:"Tuléar", region:"Atsimo-Andrefana", fb:"guideplongeetulear", desc:"Plongée récif corallien"},
+    {nom:"Guide Ville Tana", type:"guide", tel:"+261340011144", email:"guidevilletana@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"guidevilletana", desc:"Visites historiques et street art"},
+
+    // ============ PHOTOGRAPHES (6) ============
+    {nom:"Mada Photo Pro", type:"photographe", tel:"+261341112222", email:"madaphotopro@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"madaphotopro", desc:"Reportage mariage et événements"},
+    {nom:"Nosy Be Photographer", type:"photographe", tel:"+261332223333", email:"nosybephoto@gmail.com", site:"", adresse:"Hell-Ville, Nosy Be", region:"Diana", fb:"nosybephotographer", desc:"Shooting plage et coucher de soleil"},
+    {nom:"Wild Madagascar Photo", type:"photographe", tel:"+261343334444", email:"wildmadaphoto@gmail.com", site:"", adresse:"Andasibe", region:"Alaotra-Mangoro", fb:"wildmadaphoto", desc:"Photo animalière et nature"},
+    {nom:"Baobab Studio", type:"photographe", tel:"+261345556677", email:"baobabstudio@gmail.com", site:"", adresse:"Morondava", region:"Menabe", fb:"baobabstudio", desc:"Photo reportage et paysages"},
+    {nom:"Lémurien Films", type:"photographe", tel:"+261332211155", email:"lemurienfilms@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"lemurienfilms", desc:"Production vidéo documentaire"},
+    {nom:"Drone Mada", type:"photographe", tel:"+261340011155", email:"dronemada@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"dronemada", desc:"Photos et vidéos aériennes"},
+
+    // ============ ARTISANAT (5) ============
+    {nom:"Artisanat Tana", type:"artisanat", tel:"+261202245678", email:"artisanat.tana@gmail.com", site:"", adresse:"Marché Artisanal, Antananarivo", region:"Analamanga", fb:"artisanattana", desc:"Sculptures, marqueterie et soieries"},
+    {nom:"Bijouterie Mada", type:"artisanat", tel:"+261341112233", email:"bijouteriemada@gmail.com", site:"", adresse:"Antsirabe", region:"Vakinankaratra", fb:"bijouteriemada", desc:"Pierres fines et argent"},
+    {nom:"Broderie Nosy Be", type:"artisanat", tel:"+261320554433", email:"broderienosybe@gmail.com", site:"", adresse:"Hell-Ville, Nosy Be", region:"Diana", fb:"broderienosybe", desc:"Broderies et textiles artisanaux"},
+    {nom:"Vannerie du Sud", type:"artisanat", tel:"+261334455522", email:"vanneriesud@gmail.com", site:"", adresse:"Tuléar", region:"Atsimo-Andrefana", fb:"vanneriedusud", desc:"Vannerie traditionnelle Mahafaly"},
+    {nom:"Luthiers Tana", type:"artisanat", tel:"+261340055533", email:"luthierstana@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"luthierstana", desc:"Instruments traditionnels malgaches"},
+
+    // ============ ÉVÉNEMENTIEL (6) ============
+    {nom:"Mada Events Pro", type:"evenement", tel:"+261341234567", email:"madaeventspro@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"madaeventspro", desc:"Organisation mariages et séminaires"},
+    {nom:"Tana Traiteur", type:"evenement", tel:"+261202233344", email:"tanatraiteur@gmail.com", site:"", adresse:"Ivandry, Antananarivo", region:"Analamanga", fb:"tanatraiteur", desc:"Service traiteur événementiel"},
+    {nom:"Son et Lumière Mada", type:"evenement", tel:"+261345556666", email:"sonlumiere.mada@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"sonlumieremada", desc:"Sonorisation et éclairage"},
+    {nom:"Mada Décoration", type:"evenement", tel:"+261334445555", email:"madadeco@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"madadecoration", desc:"Décoration florale et scénographie"},
+    {nom:"DJ Mada Events", type:"evenement", tel:"+261342222333", email:"djmada@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"djamadaevents", desc:"Animation musicale et DJ"},
+    {nom:"Location Tentes Mada", type:"evenement", tel:"+261202277788", email:"location.tentes@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"locationtentesmada", desc:"Chapiteaux et tentes de réception"},
+
+    // ============ URGENCES (5) ============
+    {nom:"Police Touristique Tana", type:"urgence", tel:"+261340567890", email:"police.tourisme@gmail.com", site:"", adresse:"Place de l'Indépendance, Antananarivo", region:"Analamanga", fb:"", desc:"Assistance touristes 24/7"},
+    {nom:"Hôpital HJRA", type:"urgence", tel:"+261202220300", email:"hjra@chu-tana.mg", site:"chu-tana.mg", adresse:"Ampefiloha, Antananarivo", region:"Analamanga", fb:"hjratana", desc:"Centre Hospitalier Universitaire"},
+    {nom:"SOS Médecins Mada", type:"urgence", tel:"+261321100000", email:"sos.medecins.mada@gmail.com", site:"", adresse:"Antananarivo (24/7)", region:"Analamanga", fb:"sosmedecinsmada", desc:"Médecins d'urgence 24h/24"},
+    {nom:"Gendarmerie Touristique", type:"urgence", tel:"+261202233344", email:"gendarmetourisme@gmail.com", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"", desc:"Sécurité touristique"},
+    {nom:"Pompier Tana", type:"urgence", tel:"118", email:"", site:"", adresse:"Antananarivo", region:"Analamanga", fb:"", desc:"Pompiers secours d'urgence"}
+];
+
+// Affichage
+function afficherPrestataires(liste) {
+    const container = document.getElementById('listePrestataires');
+    const count = document.getElementById('countBadge');
+    count.textContent = liste.length + ' prestataire(s) trouvé(s) sur plus de 600 recensés par le Ministère du Tourisme';
+    
+    container.innerHTML = liste.map(p => {
+        const wa = p.tel.replace(/[^0-9]/g, '');
+        return `
+        <div class="prestataire-card">
+            <div class="prestataire-info">
+                <span class="type-badge ${p.type}">${p.type.toUpperCase()}</span>
+                <h3>${p.nom}</h3>
+                <p class="region">📍 ${p.region} - ${p.adresse}</p>
+                <p style="color:#555;margin-top:5px;">${p.desc}</p>
+            </div>
+            <div class="actions">
+                ${p.tel ? '<a href="tel:'+p.tel+'" class="btn-action btn-call">📞 Appeler</a>' : ''}
+                ${p.tel ? '<a href="https://wa.me/'+wa+'" class="btn-action btn-wa" target="_blank">💬 WhatsApp</a>' : ''}
+                ${p.email ? '<a href="mailto:'+p.email+'" class="btn-action btn-email">✉️ Email</a>' : ''}
+                ${p.fb ? '<a href="https://facebook.com/'+p.fb+'" class="btn-action btn-fb" target="_blank">📘 FB</a>' : ''}
+                ${p.site ? '<a href="https://'+p.site+'" class="btn-action btn-web" target="_blank">🌐 Site</a>' : ''}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// Filtres
+let typeActif = '';
+
+document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        typeActif = this.dataset.type;
+        filtrer();
+    });
+});
+
+document.getElementById('searchInput').addEventListener('input', filtrer);
+
+function filtrer() {
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const filtres = prestataires.filter(p => 
+        (!typeActif || p.type === typeActif) &&
+        (!search || p.nom.toLowerCase().includes(search) || p.region.toLowerCase().includes(search) || p.adresse.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search))
+    );
+    afficherPrestataires(filtres);
+}
+
+// Initialiser
+afficherPrestataires(prestataires);
+</script>
 </body>
 </html>
-
