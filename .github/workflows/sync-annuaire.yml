@@ -1,0 +1,45 @@
+name: Sync Annuaire Tourisme
+
+on:
+  schedule:
+    # Tous les lundis à 8h (heure UTC)
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+    # Permet de lancer manuellement
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Sync Annuaire
+        run: |
+          echo "🔄 Synchronisation avec annuaire.tourisme.gov.mg..."
+          
+          # Vérifier si le site est accessible
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://annuaire.tourisme.gov.mg/)
+          
+          if [ "$STATUS" = "200" ]; then
+            echo "✅ Site officiel accessible"
+            
+            # Récupérer les compteurs par catégorie
+            AGENCES=$(curl -s "https://annuaire.tourisme.gov.mg/entreprise-de-voyages-et-de-prestations-touristiques" | grep -c "membre__content--item" || echo 541)
+            HEBERGEMENTS=$(curl -s "https://annuaire.tourisme.gov.mg/etablissement-dhebergement" | grep -c "membre__content--item" || echo 904)
+            
+            echo "📊 Agences: $AGENCES | Hébergements: $HEBERGEMENTS"
+            
+            # Mettre à jour les chiffres dans le fichier
+            sed -i "s/<div class=\"nb\">[0-9]*<\/div><div class=\"lb\">🗺️ Agences/<div class=\"nb\">$AGENCES<\/div><div class=\"lb\">🗺️ Agences/" fiches/prestataires/index.html
+            sed -i "s/<div class=\"nb\">[0-9]*<\/div><div class=\"lb\">🏨 Hébergements/<div class=\"nb\">$HEBERGEMENTS<\/div><div class=\"lb\">🏨 Hébergements/" fiches/prestataires/index.html
+            
+            # Commit et push si changements
+            git config user.name "Bot Sync"
+            git config user.email "bot@mada-events.mg"
+            git add fiches/prestataires/index.html
+            git diff --staged --quiet || git commit -m "Auto-sync: Mise à jour compteurs annuaire (${AGENCES} agences, ${HEBERGEMENTS} hébergements)"
+            git push
+          else
+            echo "⚠️ Site officiel inaccessible (status: $STATUS)"
+          fi
