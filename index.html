@@ -3,18 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madagascar Events & Voyages</title>
+    <title>Mada Events & Voyages</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/ambiance.css">
+    <style>
+        .hero {
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        .hero .btn-hero {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        .btn-orange {
+            background: #FF6F00;
+            color: white;
+        }
+        .btn-orange:hover {
+            background: #E65100;
+            transform: scale(1.05);
+        }
+        .btn-white {
+            background: white;
+            color: #1B5E20;
+        }
+        .btn-white:hover {
+            background: #f5f5f5;
+            transform: scale(1.05);
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        .feature-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            color: #1B5E20;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .feature-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2E7D32;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .feature-card a:hover {
+            background: #1B5E20;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Particules discretes -->
-    <div class="particules" id="particules"></div>
-
-    <!-- Barre annonce sobre -->
+    <!-- Barre annonce -->
     <div class="annonce-vacances">
-        ◆ Decouvrez la Grande Ile — Votre voyage commence ici ◆
+        ◆ Découvrez la Grande Île — Votre voyage commence ici ◆
     </div>
 
     <!-- Navigation -->
@@ -28,115 +115,51 @@
         </ul>
     </nav>
 
-    <!-- Banniere hero -->
-    <section class="hero-banner">
-        <h1>Madagascar Events & Voyages</h1>
-        <p>Trouvez le lieu parfait, pour un jour ou pour des vacances.</p>
-        <div class="btn-group">
-            <a href="fiches/prestataires/index.html" class="btn btn-outline">Prestataires</a>
-            <a href="pages/carte.html" class="btn btn-primary">Explorer la carte</a>
-        </div>
-    </section>
-
-    <div class="container">
-
-        <!-- Citation voyage -->
-        <div class="quote-box">
-            "Le voyage est la seule chose qu'on achete qui nous rend plus riche."
-            <span class="author">— Proverbe malgache</span>
-        </div>
-
-        <!-- Compteur discret -->
-        <div class="compteur-vacances">
-            <span class="jours" id="compteur">...</span>
-            <span class="label">jours pour preparer votre prochain voyage a Madagascar</span>
-            <p style="margin-top:10px; color:var(--gris); font-size:0.9em;">
-                Saison des baleines : juin a septembre &nbsp;|&nbsp; Meilleure periode : avril a decembre
-            </p>
-        </div>
-
-        <h2 class="section-title">Decouvrez la Grande Ile</h2>
-        <p class="section-subtitle">Le carnet d'adresses de confiance pour vos evenements et voyages</p>
-
-        <div class="magazine-grid">
-
-            <!-- Carte 1 : Mariage -->
-            <div class="card">
-                <svg class="card-image" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="600" height="400" fill="#1a3c2a"/>
-                    <text x="300" y="200" text-anchor="middle" font-size="120" fill="#c9a84c" opacity="0.3">M</text>
-                    <text x="300" y="260" text-anchor="middle" font-size="32" fill="#f0e6d3" font-weight="bold">Mariage</text>
-                </svg>
-                <div class="card-body">
-                    <span class="card-tag">Mariage</span>
-                    <h3>Organiser son mariage a Madagascar</h3>
-                    <p>Lieux de reception, traiteurs, photographes : tout ce qu'il vous faut pour un jour inoubliable.</p>
-                    <a href="fiches/prestataires/index.html" class="btn-card">Voir les prestataires</a>
-                </div>
-            </div>
-
-            <!-- Carte 2 : Voyage -->
-            <div class="card">
-                <svg class="card-image" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="600" height="400" fill="#1a5276"/>
-                    <text x="300" y="200" text-anchor="middle" font-size="120" fill="#c9a84c" opacity="0.3">V</text>
-                    <text x="300" y="260" text-anchor="middle" font-size="32" fill="#f0e6d3" font-weight="bold">Voyage</text>
-                </svg>
-                <div class="card-body">
-                    <span class="card-tag">Voyage</span>
-                    <h3>Guides et hebergements</h3>
-                    <p>Des guides locaux passionnes et des hebergements de charme pour un sejour authentique.</p>
-                    <a href="pages/carte.html" class="btn-card">Explorer la carte</a>
-                </div>
-            </div>
-
-            <!-- Carte 3 : Experiences -->
-            <div class="card">
-                <svg class="card-image" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="600" height="400" fill="#c0392b"/>
-                    <text x="300" y="200" text-anchor="middle" font-size="120" fill="#c9a84c" opacity="0.3">E</text>
-                    <text x="300" y="260" text-anchor="middle" font-size="32" fill="#f0e6d3" font-weight="bold">Experiences</text>
-                </svg>
-                <div class="card-body">
-                    <span class="card-tag">Experiences</span>
-                    <h3>Lune de miel & Aventures</h3>
-                    <p>Road trips, treks, plongee : des souvenirs graves a jamais dans la nature malgache.</p>
-                    <a href="fiches/prestataires/index.html" class="btn-card">Trouver un guide</a>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Citation supplementaire -->
-        <div class="quote-box">
-            "Madagascar, l'ile ou la terre est rouge comme le coeur des hommes."
-            <span class="author">— Dicton malgache</span>
-        </div>
-
+    <!-- HERO -->
+    <div class="hero">
+        <h1>🌴 Mada Events & Voyages</h1>
+        <p>Découvrez Madagascar : ses paysages, ses événements, ses prestataires</p>
+        <a href="fiches/prestataires/index.html" class="btn-hero btn-orange">📞 Prestataires</a>
+        <a href="pages/carte.html" class="btn-hero btn-white">🗺️ Explorer la carte</a>
     </div>
 
-    <!-- Pied de page -->
-    <footer>
-        <p>2026 Madagascar Events & Voyages — Le carnet d'adresses de la Grande Ile</p>
-        <p><small>Construit avec passion pour Madagascar</small></p>
-    </footer>
+    <!-- FEATURES -->
+    <div class="features">
+        <div class="feature-card">
+            <div class="icon">🏨</div>
+            <h3>Hébergements</h3>
+            <p>Hôtels, lodges, resorts pour tous les budgets</p>
+            <a href="fiches/prestataires/index.html">Voir les prestataires</a>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏛️</div>
+            <h3>Espaces Événementiels</h3>
+            <p>Mariages, baptêmes, anniversaires dans des lieux uniques</p>
+            <a href="fiches/prestataires/index.html">Voir les espaces</a>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🗺️</div>
+            <h3>Circuits & Voyages</h3>
+            <p>Agences et guides pour explorer Madagascar</p>
+            <a href="fiches/prestataires/index.html">Voir les agences</a>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🎪</div>
+            <h3>Événementiel</h3>
+            <p>Photographes, traiteurs, DJ, décoration pour vos événements</p>
+            <a href="fiches/prestataires/index.html">Voir les services</a>
+        </div>
+    </div>
 
-    <script>
-        // Compteur discret
-        const cible = new Date('2026-07-15');
-        function updateCompteur() {
-            const now = new Date();
-            const diff = Math.ceil((cible - now) / (1000 * 60 * 60 * 24));
-            document.getElementById('compteur').textContent = diff > 0 ? diff : '0';
-        }
-        updateCompteur();
-        setInterval(updateCompteur, 3600000);
-    </script>
-    <script src="assets/js/ambiance.js"></script>
+    <footer>
+        <p>📍 Madagascar — Votre destination événementielle et touristique</p>
+        <p style="margin-top:10px;">
+            <a href="fiches/prestataires/index.html">Prestataires</a> |
+            <a href="pages/carte.html">Carte</a> |
+            <a href="pages/contact.html">Contact</a>
+        </p>
+        <p style="margin-top:20px;">&copy; 2026 Mada Events & Voyages</p>
+    </footer>
 
 </body>
 </html>
-
-
-
-
